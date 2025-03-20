@@ -1,1 +1,6 @@
 # Generative_Pre_Trained_Transformers
+Trabalho de pós-graduação em informatática na disciplina de Generative Pre-Trained Transformers.
+O objetivo do trablaho é desenvolver uma memória episódica para sistemas baseados em GPT, em que seja possível lembrar de experiências do passado e usar essas experiências no futuro. A ideia básica seria a entrada da GPT receber uma tag de tempo (Ex.: dia, hora, manhã, tarde, noite, etc.) e esse conteúdo de entrada ser armazenado, por exemplo, como um banco de dados de embeddings. 
+Os textos seriam separados em fragmentos. Cada um viraria um embedding. E, no momento presente, cada dado novo que chegasse seria transformado também em um embedding. No processo de lembrança, uma busca seria feita no banco de dados de embeddings e a memória episódica recuperada seria reinserida no momento presente para benefício do sistema em execução. 
+Ela pode precisar ser mastigada por uma outra GPT para poder aparecer no momento presente de forma apropriada, e compor de forma benéfica o momento presente na tarefa que se apresentar. 
+Outras alternativas para se armazenar e recuperar a memória episódica (por exemplo, alternativas puramente neurais, tais como fine tuning periódicos com dados com tag de tempo) podem ser consideradas.
