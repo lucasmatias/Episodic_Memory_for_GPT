@@ -6,6 +6,7 @@ Lucas Matias Caetano,
 | DOWNLOADS DISPONÍVEIS |
 | :------------------: |
 | [DATASET](https://github.com/lucasmatias/Episodic_Memory_for_GPT/blob/main/memorias_teste.csv) |
+| [RELATORIO](https://github.com/lucasmatias/Episodic_Memory_for_GPT/blob/main/Relatorio.pdf) |
 
 ## Índice
 
