@@ -30,7 +30,7 @@ Principais funcionalidades:
 - Recuperação por similaridade
 - Integração com prompts GPT
 
-## Instalação
+## Instalação bibliotecas
 
 ```bash
 pip install chromadb sentence-transformers pydantic
