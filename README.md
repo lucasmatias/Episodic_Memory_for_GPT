@@ -1,6 +1,117 @@
-# Generative_Pre_Trained_Transformers
-Trabalho de pós-graduação em informatática na disciplina de Generative Pre-Trained Transformers.
-O objetivo do trablaho é desenvolver uma memória episódica para sistemas baseados em GPT, em que seja possível lembrar de experiências do passado e usar essas experiências no futuro. A ideia básica seria a entrada da GPT receber uma tag de tempo (Ex.: dia, hora, manhã, tarde, noite, etc.) e esse conteúdo de entrada ser armazenado, por exemplo, como um banco de dados de embeddings. 
-Os textos seriam separados em fragmentos. Cada um viraria um embedding. E, no momento presente, cada dado novo que chegasse seria transformado também em um embedding. No processo de lembrança, uma busca seria feita no banco de dados de embeddings e a memória episódica recuperada seria reinserida no momento presente para benefício do sistema em execução. 
-Ela pode precisar ser mastigada por uma outra GPT para poder aparecer no momento presente de forma apropriada, e compor de forma benéfica o momento presente na tarefa que se apresentar. 
-Outras alternativas para se armazenar e recuperar a memória episódica (por exemplo, alternativas puramente neurais, tais como fine tuning periódicos com dados com tag de tempo) podem ser consideradas.
+# Episodic Memory for GPT
+
+Lucas Matias Caetano,  
+"Memória Episódica para Sistemas Baseados em GPT: Uma Implementação Prática"
+
+| DOWNLOADS DISPONÍVEIS |
+| :------------------: |
+| [DATASET](https://github.com/lucasmatias/Episodic_Memory_for_GPT/blob/main/memorias_teste.csv) |
+
+## Índice
+
+- [Descrição](#descrição)
+- [Instalação](#instalação)
+- [Como Usar](#como-usar)
+  - [Inicialização do Sistema](#inicialização-do-sistema)
+  - [Armazenamento de Memórias](#armazenamento-de-memórias)
+  - [Recuperação de Memórias](#recuperação-de-memórias)
+  - [Geração de Contexto](#geração-de-contexto)
+- [Avaliação](#avaliação)
+- [Exemplos](#exemplos)
+- [Detalhes Técnicos](#detalhes-técnicos)
+
+## Descrição
+
+Sistema de memória episódica para enriquecer modelos baseados em GPT com capacidade de armazenar e recuperar informações contextuais. Utiliza ChromaDB para armazenamento vetorial e Sentence Transformers para geração de embeddings.
+
+Principais funcionalidades:
+- Etiquetagem temporal automática
+- Divisão de textos longos
+- Recuperação por similaridade
+- Integração com prompts GPT
+
+## Instalação
+
+```bash
+pip install chromadb sentence-transformers pydantic
+```
+
+## Como Usar
+
+### Inicialização do Sistema
+```python
+memory_system = EpisodicMemorySystem()
+```
+
+### Armazenamento de Memórias
+```python
+memory_ids = memory_system.store_memory(
+    "O usuário gosta de música clássica e jazz.",
+    {"tópico": "música"}
+)
+```
+
+### Recuperação de Memórias
+```python
+memórias = memory_system.retrieve_memories(
+    "Quais são os gostos musicais do usuário?",
+    n_results=3
+)
+```
+
+### Geração de Contexto
+```python
+prompt = "Descreva os interesses do usuário."
+prompt_enriquecido = memory_system.generate_context_with_memories(prompt)
+```
+
+## Avaliação
+
+Módulo de avaliação com métricas:
+
+```python
+evaluator = EpisodicMemoryEvaluator(memory_system)
+evaluator.add_test_case(
+    query="Quais são os interesses do usuário?",
+    relevant_memory_ids=["id_memória"],
+    description="Teste de preferências musicais"
+)
+resultados = evaluator.evaluate(k=3)
+```
+
+Métricas incluídas:
+
+- Precisão@k
+- Revocação@k
+- MRR (Mean Reciprocal Rank)
+- Similaridade média
+
+## Exemplos
+
+### Uso Básico
+```python
+# Inicializar
+memory_system = EpisodicMemorySystem()
+
+# Armazenar
+memory_system.store_memory("O usuário adora pizza de calabresa.", {"tópico": "comida"})
+
+# Recuperar
+memórias = memory_system.retrieve_memories("Qual a comida favorita do usuário?")
+
+# Contexto
+enriquecido = memory_system.generate_context_with_memories("Fale sobre as preferências alimentares.")
+```
+
+## Detalhes Técnicos
+
+Tecnologias utilizadas:
+
+- **ChromaDB**: Armazenamento vetorial
+- **Sentence Transformers**: Geração de embeddings
+- **Metadados temporais**: Data/hora automáticos
+- **Chunking**: Divisão de textos (padrão: 512 tokens)
+
+## Licença
+
+Este projeto é licenciado sob a Licença MIT - veja o arquivo LICENSE para mais detalhes.
