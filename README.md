@@ -10,7 +10,7 @@ Lucas Matias Caetano,
 ## Índice
 
 - [Descrição](#descrição)
-- [Instalação](#instalação)
+- [Instalação Bibliotecas](#Instalação-bibliotecas)
 - [Como Usar](#como-usar)
   - [Inicialização do Sistema](#inicialização-do-sistema)
   - [Armazenamento de Memórias](#armazenamento-de-memórias)
